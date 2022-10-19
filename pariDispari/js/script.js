@@ -4,18 +4,33 @@ Sommiamo i due numeri
 Stabiliamo se la somma dei due numeri è pari o dispari (usando una funzione)
 Dichiariamo chi ha vinto. */
 
-const input = prompt("Pari o dispari ? ");
-const number = parseInt(prompt("Inserisci un numero da 1 a 5"));
-const randomNumber = myRandom(1, 5);
-const sum = number + randomNumber;
+const container = document.querySelector('.container');
+const btn = document.querySelector('.btn');
+const number = document.querySelector('#number');
+const evenOdd = document.querySelector('#evenodd');
+const output = document.createElement('output');
+container.append(output);
 
-if(input === oddEven(sum))
-  console.log("Hai vinto !");
+//? Listener
+btn.addEventListener('click', function(){
 
-else 
-  console.log("Hai perso :(");
+  const randomN = myRandom(1, 5);
+  const sum = parseInt(number.value) + randomN;
+  output.innerText = `
+    TU : ${number.value}
+    PC : ${randomN}
+    SUM : ${sum}
+  `;
 
-  
+  if(evenOdd.value === oddEven(sum))
+    document.querySelector('h1').innerText = "Hai Vinto !";
+
+  else 
+    document.querySelector('h1').innerText = "Hai Perso :(";
+
+});
+
+//? Funzione pari e dispari
 function oddEven(num){
   if(!(num % 2))
     return "pari";
@@ -23,6 +38,7 @@ function oddEven(num){
   return "dispari";
 }
 
+//? Funzione random
 function myRandom(min, max){
   return Math.floor(Math.random() * (max - min + 1)) + min;
 }
